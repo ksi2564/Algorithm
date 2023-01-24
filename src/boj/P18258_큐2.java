@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 public class P18258_큐2 {
     public static int[] queue;
     public static int size = 0;
+    public static int head = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -45,18 +46,15 @@ public class P18258_큐2 {
     }
 
     public static void push(int i) {
-        queue[size++] = i;
+        queue[head + size++] = i;
     }
 
     public static int pop() {
         if (size == 0) {
             return -1;
         }
-        int tmp = queue[0];
-        for (int i = 1; i < size; i++) {
-            queue[i - 1] = queue[i];
-        }
-        queue[--size] = 0;
+        int tmp = queue[head++];
+        size--;
         return tmp;
     }
 
@@ -72,13 +70,13 @@ public class P18258_큐2 {
         if (size == 0) {
             return -1;
         }
-        return queue[0];
+        return queue[head];
     }
 
     public static int back() {
         if (size == 0) {
             return -1;
         }
-        return queue[size - 1];
+        return queue[head + size - 1];
     }
 }
